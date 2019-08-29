@@ -44,11 +44,11 @@ def make_prediction(filename):
 	saver = tf.train.Saver()
 	init = tf.global_variables_initializer()
 	
-	X_input = prepare_image(mpimg.imread(os.path.join('flowerapp/images/{0}'.format(filename))), 299, 299, .01)
+	X_input = prepare_image(mpimg.imread(os.path.join('./ml_aws/flowerapp/images/{0}'.format(filename))), 299, 299, .01)
 	X_input.shape
 	
 	with tf.Session() as sess:
 		init.run()
-		saver.restore(sess, 'flowerapp/classifier/flower_classifier.ckpt')
+		saver.restore(sess, './ml_aws/flowerapp//classifier/flower_classifier.ckpt')
 		probs = sess.run(Y_proba, feed_dict={X: X_input.reshape(-1,299,299,3)})
 		return [round(f * 100, 2) for f in probs[0]]

@@ -11,14 +11,14 @@ def flower(request):
     if request.method == 'POST':
 
         myfile = request.FILES['filename']
-        with open('flowerapp/images/' + myfile.name, 'wb') as destination:
+        with open('./ml_aws/flowerapp/images/' + myfile.name, 'wb') as destination:
             for chunk in myfile.chunks():
                 destination.write(chunk)
         
         probs = make_prediction(myfile.name)
         results = dict(zip(['Daisy','Dandelion','Rose','Sunflower','Tulip'], probs))
         
-        os.remove('flowerapp/images/' + myfile.name)
+        os.remove('./ml_aws/flowerapp/images/' + myfile.name)
         
         return render(request, 'flowerapp/file-upload.html',results)
     else:
