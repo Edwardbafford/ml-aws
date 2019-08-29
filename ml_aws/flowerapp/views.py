@@ -18,6 +18,8 @@ def flower(request):
         probs = make_prediction(myfile.name)
         results = dict(zip(['Daisy','Dandelion','Rose','Sunflower','Tulip'], probs))
         
+		print(results)
+		
         os.remove('./ml_aws/flowerapp/images/' + myfile.name)
         
         return render(request, 'flowerapp/file-upload.html',results)
