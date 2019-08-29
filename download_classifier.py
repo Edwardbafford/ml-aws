@@ -17,3 +17,4 @@ s3 = session.resource('s3')
 
 for FILE in FILES:
 	s3.Bucket(BUCKET_NAME).download_file(FILE, LOCAL+FILE)
+	print(FILE)
