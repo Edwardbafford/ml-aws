@@ -3,19 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws_creds', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
-                   sh 'docker build --tag=ml-aws --build-arg public_key=$PUBLIC  --build-arg private_key=$PRIVATE .'
-               }
+                docker.build('ml-aws')
             }
         }
         stage('Push') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                docker.withRegistry('https://403644602806.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:ml-aws') {
+                    docker.image('ml-aws').push('latest')
+                }
             }
         }
     }
