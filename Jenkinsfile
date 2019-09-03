@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws_creds', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
-                   sh 'echo uname=$PUBLIC pwd=$PRIVATE'
+                   sh 'docker build --tag=ml-aws --build-arg public_key=$PUBLIC  --build-arg private_key=$PRIVATE .'
                }
             }
         }
