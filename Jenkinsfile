@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+               withCredentials([[credentialsId: 'aws_creds', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
+                   sh 'echo uname=$PUBLIC pwd=$PRIVATE'
+               }
             }
         }
         stage('Push') {
