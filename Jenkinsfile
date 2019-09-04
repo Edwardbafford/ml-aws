@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    docker.build('ml-aws')
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-creds-2', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
+                   sh 'docker build --tag=ml-aws --build-arg public_key=$PUBLIC --build-arg private_key=$PRIVATE .'
                 }
             }
         }
