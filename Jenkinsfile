@@ -1,19 +1,31 @@
 pipeline {
     agent any
     stages {
+        stage('Clean') {
+            steps {
+                sh "docker stop \$(docker ps -q --filter ancestor=ml-aws)"
+                sh 'docker system prune -f'
+            }
+        }        
         stage('Build') {
             steps {
-                echo 'Building..'
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-creds-2', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
+                   sh 'docker build --tag=ml-aws --build-arg public_key=$PUBLIC --build-arg private_key=$PRIVATE .'
+                }
             }
         }
         stage('Push') {
             steps {
-                echo 'Testing..'
+                script {
+                    docker.withRegistry('https://403644602806.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:ml-aws') {
+                        docker.image('ml-aws').push('latest')
+                    }
+                }
             }
         }
-        stage('Deploy') {
+        stage('Run') {
             steps {
-                echo 'Deploying....'
+                sh 'docker run -p 8000:80 ml-aws'
             }
         }
     }
