@@ -3,9 +3,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                script {
-                    sh -x $WORKSPACE/clean.sh
-                }
+                sh -x $WORKSPACE/clean.sh
             }
         }        
         stage('Build') {
