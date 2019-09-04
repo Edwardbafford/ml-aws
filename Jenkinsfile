@@ -2,15 +2,14 @@ pipeline {
     agent any
     stages {
         stage('Clean') {
-            steps {
-                try{
-                    sh 'docker container stop ml-aws'
-                    sh 'docker system prune -f'
-                }catch(err){
-                    sh 'echo no container running'
-                }
+            try {
+                sh 'docker container stop ml-aws'
+                sh 'docker system prune -f'
             }
-        }        
+            catch (exc) {
+                echo 'No container running'
+            }
+        }      
         stage('Build') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-creds-2', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
