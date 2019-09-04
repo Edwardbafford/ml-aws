@@ -17,5 +17,10 @@ pipeline {
                 }
             }
         }
+        stage('Run') {
+            steps {
+                sh 'docker run -p 8000:80 ml-aws'
+            }
+        }
     }
 }
