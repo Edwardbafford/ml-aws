@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                sh -x $WORKSPACE/clean.sh
+                sh '~/ml-aws/clean.sh'
             }
         }        
         stage('Build') {
