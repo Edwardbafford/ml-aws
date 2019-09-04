@@ -2,12 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Clean') {
-            try {
-                sh 'docker container stop ml-aws'
+            steps {
+                sh 'docker container stop ml-aws || true'
                 sh 'docker system prune -f'
-            }
-            catch (exc) {
-                echo 'No container running'
             }
         }      
         stage('Build') {
