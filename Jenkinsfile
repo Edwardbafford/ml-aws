@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('Clean') {
+            steps {
+                sh 'docker stop $(docker ps -q --filter ancestor=ml-aws)'
+                sh 'docker system prune -f'
+            }
+        }        
         stage('Build') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-creds-2', usernameVariable: 'PUBLIC', passwordVariable: 'PRIVATE']]) {
