@@ -3,13 +3,11 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                script {
-                    try{
-                        docker container stop ml-aws
-                        docker system prune -f
-                    }catch(err){
-                        echo no container running
-                    }
+                try{
+                    docker container stop ml-aws
+                    docker system prune -f
+                }catch(err){
+                    echo no container running
                 }
             }
         }        
