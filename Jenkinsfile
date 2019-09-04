@@ -7,6 +7,8 @@ pipeline {
                     try{
                         docker container stop ml-aws
                         docker system prune -f
+                    }catch(err){
+                        echo no container running
                     }
                 }
             }
