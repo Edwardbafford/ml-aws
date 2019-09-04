@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'docker run -p 8000:80 --name ml-aws  403644602806.dkr.ecr.us-west-2.amazonaws.com/ml-aws'
+                sh 'docker run -d -p 8000:80 --name ml-aws  403644602806.dkr.ecr.us-west-2.amazonaws.com/ml-aws'
             }
         }
     }
