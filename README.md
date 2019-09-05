@@ -3,6 +3,8 @@ Small ML application deployed on the AWS cloud which leverages EC2, ECR, and S3 
   
 Jenkins:  
 http://52.39.119.98:8080/  
+username - louie  
+password - test  
   
 ### CNN
 The following link prompts the user to upload an image (JPEG only please!) of a flower and my model will return a prediction based on one of five options. The model was developed using Tensorflow and was actually developed by retraining the top layers of an aleady existing Google CNN.  
