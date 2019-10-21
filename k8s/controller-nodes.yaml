@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: controller-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: controller-node
+  template:
+    metadata:
+      labels:
+        app: controller-node
+    spec:
+      containers:
+      - name: controller-node
+        image: edwardbafford/ml-controller
