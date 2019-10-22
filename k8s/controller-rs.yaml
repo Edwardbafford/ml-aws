@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta2
 kind: ReplicaSet
 metadata:
-  name: controller-node
+  name: controller-rc
 spec:
   replicas: 1
   selector:
