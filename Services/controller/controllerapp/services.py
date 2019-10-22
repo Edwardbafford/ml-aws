@@ -1,3 +1,5 @@
+import os
+import time
 from google.cloud import storage
 
 def store_image(load,save):
@@ -5,6 +7,11 @@ def store_image(load,save):
     bucket = storage_client.get_bucket('cnn-images')
     blob = bucket.blob(save)
     blob.upload_from_filename(load)
+    return
+
+def clean_images(filename):
+    time.sleep(2)
+    os.remove(filename)
     return
 
 def cnn_prediction(filename):
