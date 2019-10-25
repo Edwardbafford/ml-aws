@@ -1,0 +1,6 @@
+Django==2.2.1
+numpy==1.12.1
+tensorflow==1.10
+matplotlib==3.10
+scikit-image==0.14.2
+google-cloud-storage
