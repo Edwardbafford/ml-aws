@@ -1,13 +1,13 @@
-from django.shortcuts import render
-from .services import store_image, cnn_prediction, clean_images
-from PIL import Image
 import _thread
+from PIL import Image
+from django.shortcuts import render
 from resizeimage import resizeimage
+from .services import store_image, cnn_prediction, clean_images
 
 def index(request):
     return render(request,'index.html')
 
-#TODO - multithreading?
+#TODO - multithreading
 #TODO - extract dependencies
 def flower(request):
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def flower(request):
         try:
             img = resizeimage.resize_width(img, 200)
         except:
-            print('Small image')
+            print('small image')
         
         img.save(filename, img.format)
         img_file.close()
