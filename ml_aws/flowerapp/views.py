@@ -1,3 +1,6 @@
+
+# OLD CODE -- BEWARE
+
 import os
 from django.shortcuts import render
 from django.http import JsonResponse

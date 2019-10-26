@@ -1,0 +1,5 @@
+Django==2.2.1
+Pillow
+boto3
+google-cloud-storage
+python-resize-image
