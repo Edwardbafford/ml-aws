@@ -6,7 +6,7 @@ node {
   }
 
   stage('Push images') {
-    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+    docker.withRegistry('https://index.docker.io/v1/', 'docker') {
       controllerImage.push()
     }
   }
