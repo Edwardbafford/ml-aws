@@ -4,6 +4,7 @@ pipeline {
         stage('CNN') {
             steps {
                 sh 'pwd'
+                sh 'docker ps'
             }
         }      
     }
