@@ -14,7 +14,7 @@ node {
     cnnImage = docker.build("edwardbafford/ml-cnn:latest", "./Services/cnn")
   }
   
-  // Push built images
+  // Push built images to dockerhub repository
   stage('Push') {
     docker.withRegistry('https://index.docker.io/v1/', 'docker') {
       controllerImage.push()
