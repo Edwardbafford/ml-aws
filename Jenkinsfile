@@ -9,10 +9,17 @@ pipeline {
         }  
         stage('Controller') {
             steps {
-                sh 'pwd'
-                sh 'git --version'
-                sh 'docker ps'
+                sh 'cd /home/lbafford_mprove/ml-aws/Services/controller/'
+                sh 'docker build --tag=edwardbafford/ml-controller .'
+                sh 'docker push edwardbafford/ml-controller'
             }
-        }      
+        }
+        stage('CNN') {
+            steps {
+                sh 'cd /home/lbafford_mprove/ml-aws/Services/cnn/'
+                sh 'docker build --tag=edwardbafford/ml-cnn .'
+                sh 'docker push edwardbafford/ml-cnn'
+            }
+        } 
     }
 }
