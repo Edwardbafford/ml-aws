@@ -1,8 +1,9 @@
 node {
   checkout scm
-
+  def controllerImage
+  
   stage('Controller') {
-    def controllerImage = docker.build("edwardbafford/ml-controller", "./Services/controller")
+    controllerImage = docker.build("edwardbafford/ml-controller:latest", "./Services/controller")
   }
 
   stage('Push images') {
