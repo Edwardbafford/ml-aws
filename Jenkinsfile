@@ -22,8 +22,14 @@ node {
     }
   }
   
+  // Re-package chart and push to chartmuseum repo
+  stage('Helm') {
+    sh 'helm push /home/lbafford_mprove/ml-aws/helm/ml-aws chartmuseum'
+  }  
+  
   // Clean and prepare environment after changes have been made
   stage('Clean') {
+    sh 'helm repo update chartmuseum'
     sh 'docker system prune -f'
   }
 }
