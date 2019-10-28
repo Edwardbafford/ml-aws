@@ -1,10 +1,8 @@
 node {
   // Setup
+  sh 'git -C /home/lbafford_mprove/ml-aws pull origin master'
   def controllerImage
   def cnnImage
-  dir("/home/lbafford_mprove/ml-aws"){
-    sh 'git pull origin master'
-  }
   
   // Build and test controller service
   stage('Controller') {
