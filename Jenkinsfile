@@ -21,4 +21,16 @@ node {
       cnnImage.push()
     }
   }
+  
+  // Push Chart to Helm Repo
+  stage('Helm') {
+    sh 'helm package ./helm/ml-aws/'
+    sh 'helm push ./helm/ml-aws/ chartmuseum'
+  }
+  
+  // Clean and prepare environment after changes have been made
+  stage('Clean') {
+    sh 'helm repo update chartmuseum'
+    sh 'docker system prune -f'
+  }
 }
