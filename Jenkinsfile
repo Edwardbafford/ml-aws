@@ -24,6 +24,8 @@ node {
   
   // Re-package chart and push to chartmuseum repo
   stage('Helm') {
+    sh 'pwd'
+    sh 'ls'
     sh 'helm push ./helm/ml-aws chartmuseum'
   }
   
