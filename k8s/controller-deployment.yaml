@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/name: cnn-deployment
-  name: cnn-deployment
+    app.kubernetes.io/name: controller-deployment
+  name: controller-deployment
 spec:
-  replicas: {{ .Values.cnn.deployment.replicas }}
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: cnn-deployment
+      app.kubernetes.io/name: controller-deployment
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: cnn-deployment
+        app.kubernetes.io/name: controller-deployment
     spec:
       containers:
-      - image: edwardbafford/ml-cnn
-        name: cnn-node
+      - image: edwardbafford/ml-controller
+        name: controller-node
         ports:
-        - containerPort: {{ .Values.cnn.port }}
+        - containerPort: 80
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/key/api-key.json"

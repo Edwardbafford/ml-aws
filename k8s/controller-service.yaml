@@ -6,10 +6,10 @@ metadata:
   name: controllersvc
 spec:
   ports:
-  - nodePort: {{ .Values.controller.service.nodeport }}
-    port: {{ .Values.controller.port }}
+  - nodePort: 31031
+    port: 80
     protocol: TCP
-    targetPort: {{ .Values.controller.service.targetport }}
+    targetPort: 80
   selector:
     app.kubernetes.io/name: controller-deployment
   sessionAffinity: None

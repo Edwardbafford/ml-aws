@@ -6,10 +6,10 @@ metadata:
   name: cnnsvc
 spec:
   ports:
-  - nodePort: {{ .Values.cnn.service.nodeport }}
-    port: {{ .Values.cnn.port }}
+  - nodePort: 31030
+    port: 80
     protocol: TCP
-    targetPort: {{ .Values.cnn.service.targetport }}
+    targetPort: 80
   selector:
     app.kubernetes.io/name: cnn-deployment
   sessionAffinity: None
