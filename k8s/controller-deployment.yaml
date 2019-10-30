@@ -15,10 +15,11 @@ spec:
         app.kubernetes.io/name: controller-deployment
     spec:
       containers:
-      - image: edwardbafford/ml-controller
+      - image: edwardbafford/ml-controller:latest
         name: controller-node
         ports:
         - containerPort: 80
+        imagePullPolicy: Always
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/key/api-key.json"
