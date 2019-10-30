@@ -22,6 +22,12 @@ node {
     }
   }
   
+  // Refresh k8s pods
+  stage('k8s') {
+    sh 'kubectl apply -f .\k8s\controller-deployment.yaml'
+    sh 'kubectl apply -f .\k8s\cnn-deployment.yaml'
+  }
+  
   // Clean and prepare environment after changes have been made
   stage('Clean') {
     sh 'docker system prune -f'
