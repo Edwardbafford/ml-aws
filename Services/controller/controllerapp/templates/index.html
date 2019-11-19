@@ -1,67 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Home</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<body>
-
-<div class="sidenav">
-  <a href="/">Home</a>
-  <a href="/upload">CNN</a>
-</div>
-
-<div class="main">
-<div class="container mt-3">
-  <h2>Machine Learning Projects</h2>
-  <p>Welcome to my webpage, I've developed this simple web application to display some of my machine learning engineering work. Use the sidebar to browse
-  them.</p>
-</div>
-</div>
-   
-</body>
-</html> 
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/nar-bar.css' %}" />
+	</head>
+	<body>
+		<div class="sidenav">
+			<a href="/">Home</a>
+			<a href="/upload">CNN</a>
+		</div>
+		<div class="main">
+			<div class="container mt-3">
+				<h2>Machine Learning Projects</h2>
+				<p>Welcome to my webpage, I've developed this simple web application to display some of my machine learning engineering work. Use the sidebar to browse the website.</p>
+				<a href="https://github.com/Edwardbafford/ml-aws">Github</a>
+				<br>
+				<a href="https://www.linkedin.com/in/louie-bafford-190a5688/">LinkedIn</a>
+				<br>
+				<br>
+				<h3>Application Technologies</h3>
+				<ul>
+					<li>Microservice Architecture using Kubernetes</li>
+					<li>CI/CD Pipeline using Jenkins</li>
+					<li>Application runs completely on Google Cloud Platform</li>
+					<li>Web application created using Django Python Framework</li>
+					<li>Nueral Network structures manipulated with Tensorflow</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
