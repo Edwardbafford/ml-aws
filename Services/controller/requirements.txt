@@ -1,4 +1,4 @@
-Django==2.2.1
+Django==2.2.4
 Pillow
 boto3
 google-cloud-storage
