@@ -3,26 +3,32 @@ import time
 import requests
 from google.cloud import storage
 
-def store_image(load,save):
+from .containers.serviceContainer import Container
+container = Container()
+
+def gcp_store_image(load,save):
     storage_client = storage.Client()
-    bucket = storage_client.get_bucket('cnn-images')
+    bucket = storage_client.get_bucket(container.image_bucket)
     blob = bucket.blob(save)
     blob.upload_from_filename(load)
     return
 
-def clean_images(filename):
-    time.sleep(2)
-    os.remove(filename)
-    return
-
-def cnn_prediction(filename):
-    #TODO - Make call to microservice and get predictions
+def k8s_cnn_prediction(filename):
     cleaned_name = '.'.join(filename.split('.')[:-1])
-    URL = 'http://{0}:{1}/prediction/{2}'.format(
-            os.environ['CNNSVC_SERVICE_HOST'],
-            os.environ['CNNSVC_SERVICE_PORT'],
+    URL = 'http://{0}:{1}/{2}/{3}'.format(
+            os.environ[container.cnn_host],
+            os.environ[container.cnn_port],
+            container.cnn_url,
             cleaned_name)
+    
+    #TODO - log
+    print(URL)
+    
     probs = requests.get(url = URL).json()["preds"]
     
     return dict(zip(['Daisy','Dandelion','Rose','Sunflower','Tulip'], probs))
 
+def standard_clean_image(filename):
+    time.sleep(2)
+    os.remove(filename)
+    return
