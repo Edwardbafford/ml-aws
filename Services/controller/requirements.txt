@@ -3,4 +3,3 @@ Pillow
 boto3
 google-cloud-storage
 python-resize-image
-dependency-injector
