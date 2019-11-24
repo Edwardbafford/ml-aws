@@ -2,6 +2,8 @@ import os
 from google.cloud import storage
 from .containers.serviceContainer import Container
 
+# Image manager implementations
+# GCPImageManager - manages from a remote GCP Storage bucket
 
 class GCPImageManager:
     def __init__(self):

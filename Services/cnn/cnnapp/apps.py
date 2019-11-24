@@ -4,6 +4,8 @@ from google.cloud import storage
 from .containers.mainContainer import Container
 c = Container()
 
+# cnnapp configuration
+# downloads CNN model at startup
 
 class CnnappConfig(AppConfig):
     name = 'cnnapp'
@@ -11,7 +13,7 @@ class CnnappConfig(AppConfig):
     def ready(self):
 
         try:
-            if os.environ['ML_AWS_ENV'] == 'DEV2':
+            if os.environ['ML_AWS_ENV'] == 'DEV':
                 # TODO - logging
                 print('skipping model download in ')
                 return

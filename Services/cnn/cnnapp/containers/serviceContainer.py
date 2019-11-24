@@ -1,5 +1,6 @@
 
 
+# Abstraction layer for service files
 class Container():
     def __init__(self):
         self.image_bucket = 'cnn-images'
