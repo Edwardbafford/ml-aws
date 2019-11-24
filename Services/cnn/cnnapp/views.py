@@ -1,25 +1,15 @@
-import os
-from django.shortcuts import render
 from django.http import JsonResponse
-from .services import make_prediction
-from django.core.files.storage import FileSystemStorage
-from google.cloud import storage
+from .containers.mainContainer import Container
+c = Container()
+
 
 def index_test(request):
-    return JsonResponse({'test_successful':'True'})
+    return JsonResponse({'test_successful': 'True'})
+
 
 def prediction(request, image):
-    # Download image
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket('cnn-images')
-    blob = bucket.blob(image + '.jpg')
-    blob.download_to_filename("./cnnapp/images/" + blob.name)
-    
-    # Make Prediction
-    preds = make_prediction(blob.name)
-    
-    #Delete image from local and google cloud storage
-    blob.delete()
-    os.remove("./cnnapp/images/" + blob.name)
-    
-    return JsonResponse({'preds':preds})
+    c.im.download_image(image)
+    preds = c.make_prediction(c.im.local_name)
+    c.im.delete_remote_image()
+    c.im.delete_local_image()
+    return JsonResponse({'preds': preds})

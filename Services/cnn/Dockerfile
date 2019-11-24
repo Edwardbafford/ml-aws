@@ -4,8 +4,6 @@ WORKDIR /cnn
 
 COPY . /cnn
 
-RUN pwd
-RUN ls
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 RUN python3 manage.py migrate
 

@@ -1,15 +1,25 @@
+import os
 from django.apps import AppConfig
 from google.cloud import storage
+from .containers.mainContainer import Container
+c = Container()
+
 
 class CnnappConfig(AppConfig):
     name = 'cnnapp'
     
-    def ready(self):        
-        storage_client = storage.Client()
+    def ready(self):
 
-        blobs = storage_client.list_blobs('cnn-model')
-        bucket = storage_client.get_bucket('cnn-model')
+        try:
+            if os.environ['ML_AWS_ENV'] == 'DEV2':
+                # TODO - logging
+                print('skipping model download in ')
+                return
+            else:
+                # TODO - logging
+                print('downloading model')
+        except KeyError as error:
+            # TODO - logging
+            print('downloading model')
 
-        for blob in blobs:
-            blob = bucket.blob(blob.name)
-            blob.download_to_filename("./cnnapp/model/" + blob.name)
+        c.download_model()

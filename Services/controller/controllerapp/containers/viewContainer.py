@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 21 20:15:09 2019
-
-@author: louie.bafford
-"""
-
 from ..services import gcp_store_image, k8s_cnn_prediction, standard_clean_image
 
 class Container():

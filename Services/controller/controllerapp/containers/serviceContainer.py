@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 21 21:33:51 2019
-
-@author: louie.bafford
-"""
 
 class Container():
     def __init__(self):
