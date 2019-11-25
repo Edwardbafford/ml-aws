@@ -7,8 +7,8 @@ from tensorflow.contrib.slim.nets import inception
 from .ServiceHelper import prepare_image
 from .containers.serviceContainer import Container
 c = Container()
-
 # Service function layer to be used in Views
+
 
 # Download model from GCP Storage bucket
 def google_download_model():
@@ -18,6 +18,7 @@ def google_download_model():
     for blob in blobs:
         blob = bucket.blob(blob.name)
         blob.download_to_filename(c.model_dir + blob.name)
+
 
 # Use a re-trained Google model for making predictions
 def google_model_make_prediction(filename):

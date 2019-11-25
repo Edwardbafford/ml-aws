@@ -1,4 +1,4 @@
-from ..services import gcp_store_image, k8s_cnn_prediction, standard_clean_image
+from ..services import gcp_store_image, k8s_cnn_prediction, standard_clean_image, standard_resize_image
 
 
 # Abstraction layer for view files
@@ -13,3 +13,4 @@ class Container():
         self.clean_image = standard_clean_image
         self.cnn_prediction = k8s_cnn_prediction
         self.store_image = gcp_store_image
+        self.resize_image = standard_resize_image

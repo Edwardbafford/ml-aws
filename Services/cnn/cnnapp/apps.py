@@ -4,9 +4,9 @@ from google.cloud import storage
 from .containers.mainContainer import Container
 c = Container()
 
+
 # cnnapp configuration
 # downloads CNN model at startup
-
 class CnnappConfig(AppConfig):
     name = 'cnnapp'
     

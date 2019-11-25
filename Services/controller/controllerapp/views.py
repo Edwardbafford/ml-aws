@@ -1,7 +1,6 @@
-import _thread
-from PIL import Image
+import uuid
+from threading import Thread
 from django.shortcuts import render
-from resizeimage import resizeimage
 from .containers.viewContainer import Container
 container = Container()
 
@@ -15,32 +14,32 @@ def index(request):
 
 # CNN view
 def flower(request):
+    # Uploading a file
     if request.method == 'POST':
-        myfile = request.FILES['filename']
-        filename = container.base_file + myfile.name
+        rand_name = str(uuid.uuid4()) + '.jpg'
+
+        # write file locally
+        filename = container.base_file + rand_name
         with open(filename, 'wb') as destination:
-            for chunk in myfile.chunks():
+            for chunk in request.FILES['filename'].chunks():
                 destination.write(chunk)
 
-        container.store_image(filename, myfile.name)
-        img_file = open(filename, 'rb')
-        img = Image.open(img_file)
-        
-        try:
-            img = resizeimage.resize_width(img, container.file_width)
-        except:
-            # TODO - log?
-            print('small image')
-        
-        img.save(filename, img.format)
-        img_file.close()
-        results = container.cnn_prediction(myfile.name)
-        results['filename'] = myfile.name
+        # resize local image for browser view
+        resize = Thread(target=container.resize_image, args=(filename,))
+        resize.start()
+
+        # get prediction data
+        container.store_image(filename, rand_name)
+        results = container.cnn_prediction(rand_name)
+        results['filename'] = rand_name
+        resize.join()
         view = render(request, container.cnn_view, results)
         
-        # Delete images in the background while view is returned
-        _thread.start_new_thread(container.clean_image, (filename,))
+        # Delete local image in background
+        clean = Thread(target=container.clean_image, args=(filename,))
+        clean.start()
         
         return view
     else:
+        # Base view
         return render(request, container.cnn_view)

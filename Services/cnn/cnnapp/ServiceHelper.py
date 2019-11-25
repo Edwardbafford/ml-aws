@@ -1,9 +1,9 @@
 import numpy as np
 from skimage.transform import resize
-
 # Functions only to be used in service layer
-# Prepare Image - scales image for processing by CNN
 
+
+# scales image for processing by CNN
 def prepare_image(image, target_width, target_height, max_zoom):
     height = image.shape[0]
     width = image.shape[1]
