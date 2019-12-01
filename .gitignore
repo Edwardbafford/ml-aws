@@ -1,13 +1,13 @@
 # Personal
 secrets/
 
-services/controller/controllerapp/static/
-services/controller/controller_venv
-services/controller/.idea/
+Services/controller/controllerapp/static/
+Services/controller/controller_venv
+Services/controller/.idea/
 
-services/cnn/cnnapp/model/
-services/cnn/cnn_venv/
-services/cnn/.idea/
+Services/cnn/cnnapp/model/
+Services/cnn/cnn_venv/
+Services/cnn/.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
