@@ -21,6 +21,9 @@
 				<h2>Flower Classifier</h2>
 				<p>Upload an image of a <strong>Dandelion</strong>, <strong>Daisy</strong>, <strong>Rose</strong>, <strong>Tulip</strong>, or
 					<strong>Sunflower</strong> and submit it. My model will return its best guess as to which type of flower you uploaded.</p>
+				<div id="image-alert" class="alert alert-danger" role="alert">
+  					uploaded image must be in jpeg format
+				</div>
 				<form action="#" enctype="multipart/form-data" method="post">
 					{% csrf_token %}
 					<div class="custom-file mb-3">
@@ -28,7 +31,7 @@
 						<label class="custom-file-label" for="customFile">Choose file</label>
 					</div>
 					<div class="mt-3">
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" id="submit-button" class="btn btn-primary" disabled>Submit</button>
 					</div>
 				</form>
 			</div>
@@ -63,9 +66,17 @@
 			</div>
 		</div>
 		<script>
+			$("#image-alert").hide()
+			
 			$(".custom-file-input").on("change", function() {
 				var fileName = $(this).val().split("\\").pop();
 				$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+				if (fileName.split(".").slice(-1)[0] == 'jpg') {
+					$('#submit-button').prop('disabled', false);
+					$("#image-alert").hide()
+				}else{
+					$("#image-alert").show()
+				}
 			});
 		</script>
 	</body>
