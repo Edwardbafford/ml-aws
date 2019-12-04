@@ -22,8 +22,16 @@
 				<p>Upload an image of a <strong>Dandelion</strong>, <strong>Daisy</strong>, <strong>Rose</strong>, <strong>Tulip</strong>, or
 					<strong>Sunflower</strong> and submit it. My model will return its best guess as to which type of flower you uploaded.</p>
 				<div id="image-alert" class="alert alert-danger" role="alert">
-  					uploaded image must be in jpeg format
+  					Uploaded image must be in JPEG format
 				</div>
+				{% if corrupt %}
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  					Uploaded file was bad or corrupt
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+  					</button>
+				</div>
+				{% endif %}
 				<form action="#" enctype="multipart/form-data" method="post">
 					{% csrf_token %}
 					<div class="custom-file mb-3">

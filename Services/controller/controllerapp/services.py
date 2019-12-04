@@ -11,7 +11,7 @@ container = Container()
 
 
 # Upload file to GCP Storage bucket
-def gcp_store_image(load,save):
+def gcp_store_image(load, save):
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(container.image_bucket)
     blob = bucket.blob(save)
