@@ -1,6 +1,21 @@
 import numpy as np
+from PIL import Image
 from skimage.transform import resize
+from .exceptions import ImageCorrupt
 # Functions only to be used in service layer
+
+
+# verify image is in proper jpg format
+def verify_image(image):
+    try:
+        img = Image.open(image)
+        img.verify()
+    except (IOError, SyntaxError) as e:
+        # TODO - log
+        message = '{0} is bad or corrupted'.format(image.split('/')[-1])
+        print(message)
+        raise ImageCorrupt(message)
+    return
 
 
 # scales image for processing by CNN

@@ -4,7 +4,7 @@ from google.cloud import storage
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 from tensorflow.contrib.slim.nets import inception
-from .ServiceHelper import prepare_image
+from .ServiceHelper import prepare_image, verify_image
 from .containers.serviceContainer import Container
 c = Container()
 # Service function layer to be used in Views
@@ -22,6 +22,10 @@ def google_download_model():
 
 # Use a re-trained Google model for making predictions
 def google_model_make_prediction(filename):
+    image = os.path.join('{0}{1}'.format(c.image_dir, filename))
+
+    verify_image(image)
+
     tf.reset_default_graph()
     X = tf.placeholder(tf.float32, shape=[None, 299, 299, 3], name="X")
     with slim.arg_scope(inception.inception_v3_arg_scope()):
@@ -31,7 +35,7 @@ def google_model_make_prediction(filename):
         Y_proba = tf.nn.softmax(flower_logits, name="Y_proba")
     saver = tf.train.Saver()
     init = tf.global_variables_initializer()
-    X_input = prepare_image(mpimg.imread(os.path.join('{0}{1}'.format(c.image_dir, filename))), 299, 299, .01)
+    X_input = prepare_image(mpimg.imread(image), 299, 299, .01)
     X_input.shape
 
     with tf.Session() as sess:

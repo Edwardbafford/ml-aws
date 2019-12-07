@@ -24,7 +24,7 @@ class GCPImageManager:
             blob.download_to_filename(self.c.image_dir + blob.name)
         except google.api_core.exceptions.NotFound as ex:
             # TODO - log
-            message = 'Image {0}/{1} was not found on GCP'.format(self.c.image_bucket,image_name + '.jpg')
+            message = '{0} was not found on GCP'.format(image_name + '.jpg')
             print(message)
             raise ImageNotFound(message)
 
