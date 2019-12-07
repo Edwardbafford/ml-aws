@@ -5,6 +5,7 @@ Services/controller/controllerapp/static/images
 Services/controller/controller_venv
 Services/controller/.idea/
 
+Services/cnn/cnnapp/images/
 Services/cnn/cnnapp/model/
 Services/cnn/cnn_venv/
 Services/cnn/.idea/

@@ -14,7 +14,7 @@ class CnnappConfig(AppConfig):
 
         try:
             if os.environ['ML_AWS_ENV'] == 'DEV':
-                # TODO - logging
+                # TODO - log
                 print('skipping model download in ')
                 return
             else:
