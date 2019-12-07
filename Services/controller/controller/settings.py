@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-	'controllerapp.apps.ControllerappConfig',
+    'controllerapp.apps.ControllerappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

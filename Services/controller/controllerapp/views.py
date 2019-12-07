@@ -40,12 +40,17 @@ def flower(request):
         resize.start()
 
         # get prediction data
-        container.store_image(filename, rand_name)
-        results = container.cnn_prediction(rand_name)
-        results['filename'] = rand_name
+        try:
+            container.store_image(filename, rand_name)
+            results = container.cnn_prediction(rand_name)
+        except Exception as e:
+            # TODO - log
+            print('processing error')
+            return render(request, container.cnn_view, {'error': True})
 
         # create view
         resize.join()
+        results['filename'] = rand_name
         view = render(request, container.cnn_view, results)
         
         # delete local image in background
