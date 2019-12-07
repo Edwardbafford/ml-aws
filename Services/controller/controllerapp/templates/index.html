@@ -10,11 +10,18 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		{% load staticfiles %}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/nar-bar.css' %}" />
+		<script>
+			$.ajax({
+   				url:"{% static 'html/sidnav.html' %}",
+   				type:'GET',
+   				success: function(data){
+       				$('#sidenav').html(data);
+   				}
+			});
+		</script>
 	</head>
 	<body>
-		<div class="sidenav">
-			<a href="/">Home</a>
-			<a href="/upload">CNN</a>
+		<div id="sidenav" class="sidenav">
 		</div>
 		<div class="main">
 			<div class="container mt-3">

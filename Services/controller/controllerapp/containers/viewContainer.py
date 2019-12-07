@@ -5,7 +5,7 @@ from ..services import gcp_store_image, k8s_cnn_prediction, standard_clean_image
 class Container():
     def __init__(self):
         # Literals
-        self.base_file = './controllerapp/static/'
+        self.base_file = './controllerapp/static/images/'
         self.cnn_view = 'file-upload.html'
         self.home_view = 'index.html'
         self.file_width = 200    

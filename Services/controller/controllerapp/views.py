@@ -32,6 +32,7 @@ def flower(request):
         except (IOError, SyntaxError) as e:
             # TODO - log
             print('corrupt file')
+            Thread(target=container.clean_image, args=(filename,)).start()
             return render(request, container.cnn_view, {'corrupt': True})
 
         # resize local image for browser view
@@ -48,8 +49,7 @@ def flower(request):
         view = render(request, container.cnn_view, results)
         
         # delete local image in background
-        clean = Thread(target=container.clean_image, args=(filename,))
-        clean.start()
+        Thread(target=container.clean_image, args=(filename,)).start()
         
         return view
     else:

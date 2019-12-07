@@ -10,11 +10,19 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		{% load staticfiles %}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/nar-bar.css' %}" />
+		<script src="{% static 'js/file-upload-helper.js' %}?ver=3"></script>
+		<script>
+			$.ajax({
+   				url:"{% static 'html/sidnav.html' %}",
+   				type:'GET',
+   				success: function(data){
+       				$('#sidenav').html(data);
+   				}
+			});
+		</script>
 	</head>
 	<body>
-		<div class="sidenav">
-			<a href="/">Home</a>
-			<a href="/upload">CNN</a>
+		<div id="sidenav" class="sidenav">
 		</div>
 		<div class="main">
 			<div class="container mt-3">
@@ -47,12 +55,12 @@
 			<br>
 			<div class="container my-3">
 				{% if Daisy %}
-				<img src="{% static '/'%}{{filename}}" class="rounded mx-auto d-block pb-5">
+				<img src="{% static 'images/'%}{{filename}}" class="rounded mx-auto d-block pb-5">
 				<table class="table">
 					<thead>
 						<tr>
 							<th scope="col"></th>
-							<th scope="col">Diasy</th>
+							<th scope="col">Daisy</th>
 							<th scope="col">Dandelion</th>
 							<th scope="col">Rose</th>
 							<th scope="col">Sunflower</th>
@@ -73,19 +81,5 @@
 				{% endif %}
 			</div>
 		</div>
-		<script>
-			$("#image-alert").hide()
-			
-			$(".custom-file-input").on("change", function() {
-				var fileName = $(this).val().split("\\").pop();
-				$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-				if (fileName.split(".").slice(-1)[0] == 'jpg') {
-					$('#submit-button').prop('disabled', false);
-					$("#image-alert").hide()
-				}else{
-					$("#image-alert").show()
-				}
-			});
-		</script>
 	</body>
 </html>

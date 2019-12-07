@@ -1,7 +1,7 @@
 # Personal
 secrets/
 
-Services/controller/controllerapp/static/
+# Services/controller/controllerapp/static/images
 Services/controller/controller_venv
 Services/controller/.idea/
 
