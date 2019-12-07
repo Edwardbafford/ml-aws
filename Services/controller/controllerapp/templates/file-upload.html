@@ -11,15 +11,8 @@
 		{% load staticfiles %}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/nar-bar.css' %}" />
 		<script src="{% static 'js/file-upload-helper.js' %}?ver=3"></script>
-		<script>
-			$.ajax({
-   				url:"{% static 'html/sidnav.html' %}",
-   				type:'GET',
-   				success: function(data){
-       				$('#sidenav').html(data);
-   				}
-			});
-		</script>
+		<script src="{% static 'js/helper.js' %}"></script>
+		<script>getNav("{% static 'html/sidnav.html' %}")</script>
 	</head>
 	<body>
 		<div id="sidenav" class="sidenav">
