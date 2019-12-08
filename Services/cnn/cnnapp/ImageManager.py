@@ -1,8 +1,11 @@
 import os
 import google
+import logging
 from google.cloud import storage
 from .exceptions import ImageNotFound
 from .containers.serviceContainer import Container
+logging.basicConfig(filename='{0}/cnn-app.log'.format(os.environ['LOG_LOCATION']),
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 # Image manager implementations
 
 
@@ -23,21 +26,18 @@ class GCPImageManager:
         try:
             blob.download_to_filename(self.c.image_dir + blob.name)
         except google.api_core.exceptions.NotFound as ex:
-            # TODO - log
             message = '{0} was not found on GCP'.format(image_name + '.jpg')
-            print(message)
+            logging.error(message)
             raise ImageNotFound(message)
 
     def delete_local_image(self):
         try:
             os.remove(self.c.image_dir + self.local_name)
         except FileNotFoundError:
-            # TODO - log
-            print('Local image does not exist')
+            logging.warning('Local {0} does not exist'.format(self.local_name))
 
     def delete_remote_image(self):
         try:
             self.blob.delete()
         except google.api_core.exceptions.NotFound:
-            # TODO - log
-            print('Remote image does not exist')
+            logging.warning('Remote {0} does not exist'.format(self.local_name))

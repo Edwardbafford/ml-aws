@@ -5,7 +5,6 @@ WORKDIR /cnn
 COPY . /cnn
 
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN python3 manage.py migrate
 
 EXPOSE 80
 

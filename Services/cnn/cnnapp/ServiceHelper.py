@@ -1,7 +1,11 @@
+import os
+import logging
 import numpy as np
 from PIL import Image
 from skimage.transform import resize
 from .exceptions import ImageCorrupt
+logging.basicConfig(filename='{0}/cnn-app.log'.format(os.environ['LOG_LOCATION']),
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 # Functions only to be used in service layer
 
 
@@ -11,9 +15,8 @@ def verify_image(image):
         img = Image.open(image)
         img.verify()
     except (IOError, SyntaxError) as e:
-        # TODO - log
         message = '{0} is bad or corrupted'.format(image.split('/')[-1])
-        print(message)
+        logging.error(message)
         raise ImageCorrupt(message)
     return
 
