@@ -1,9 +1,13 @@
+import os
 import uuid
+import logging
 from PIL import Image
 from threading import Thread
 from django.shortcuts import render
 from .containers.viewContainer import Container
 container = Container()
+logging.basicConfig(filename='{0}/controller-app.log'.format(os.environ['LOG_LOCATION']),
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Handles incoming HTTP requests
 
@@ -30,8 +34,7 @@ def flower(request):
             img = Image.open(filename)
             img.verify()
         except (IOError, SyntaxError) as e:
-            # TODO - log
-            print('corrupt file')
+            logging.error('{0} ({1}) is not a valid jpg file'.format(rand_name, request.FILES['filename'].name))
             Thread(target=container.clean_image, args=(filename,)).start()
             return render(request, container.cnn_view, {'corrupt': True})
 
@@ -44,8 +47,7 @@ def flower(request):
             container.store_image(filename, rand_name)
             results = container.cnn_prediction(rand_name)
         except Exception as e:
-            # TODO - log
-            print('processing error')
+            logging.error('Unexpected exception occurred while processing the image: {0}'.format(str(e)))
             return render(request, container.cnn_view, {'error': True})
 
         # create view

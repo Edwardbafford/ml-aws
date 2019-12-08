@@ -27,10 +27,8 @@ def k8s_cnn_prediction(filename):
             os.environ[container.cnn_port],
             container.cnn_url,
             cleaned_name)
-    # TODO - log
-    print(URL)
     probs = requests.get(url = URL).json()["preds"]
-    return dict(zip(['Daisy','Dandelion','Rose','Sunflower','Tulip'], probs))
+    return dict(zip(['Daisy', 'Dandelion', 'Rose', 'Sunflower', 'Tulip'], probs))
 
 
 # Remove file from local system
@@ -44,10 +42,7 @@ def standard_clean_image(filename):
 def standard_resize_image(filename):
     img_file = open(filename, 'rb')
     img = Image.open(img_file)
-    try:
+    if img.size[0] > container.file_width:
         img = resizeimage.resize_width(img, container.file_width)
-    except AttributeError:
-        # TODO - log?
-        print('small image')
     img.save(filename, img.format)
     img_file.close()
