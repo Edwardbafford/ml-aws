@@ -8,3 +8,4 @@ class Container():
         self.cnn_host = 'CNNSVC_SERVICE_HOST'
         self.cnn_port = 'CNNSVC_SERVICE_PORT'
         self.cnn_url = 'prediction'
+        self.file_width = 400
